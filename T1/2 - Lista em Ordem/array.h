@@ -1,6 +1,7 @@
-void Initialize(int* vector)
-{
-	vector = (int*) calloc(vector_length, sizeof(int));
-}
 
+void initialize(int* vector);
+
+void print_vector(int* vector);
+
+void destroy(int* vector);
 
