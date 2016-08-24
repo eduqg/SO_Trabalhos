@@ -1,5 +1,6 @@
-void initialize(int* vector)
+void initialize(void)
 {
+	int *vector;
 	int vector_length = 0;
 	scanf("%d", &vector_length);
 	vector = (int*) calloc(vector_length, sizeof(int));

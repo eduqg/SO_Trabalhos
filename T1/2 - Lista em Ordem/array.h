@@ -1,5 +1,5 @@
 
-void initialize(int* vector);
+void initialize(void);
 
 void print_vector(int* vector);
 
