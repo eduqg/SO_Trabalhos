@@ -87,33 +87,25 @@ int main(int argc, char* argv[])
 	for(counter = 0; counter < number_times; ++counter)
 		scanf("%d", &vector[counter]);
 
-	//printf("Para ordenação crescente aperte 1, para operação decrescente aperte 0: ");
+	/*printf("Para ordenação crescente aperte 1, para operação decrescente aperte 0: ");
 
-	//scanf("%d", &option);
+	  scanf("%d", &option);
 
-	//if(option == 1)
-		//increase_quick_sort(vector, 0, number_times - 1);
+	  if(option == 1)
+	
+	  increase_quick_sort(vector, 0, number_times - 1);
 
-	//else if(option == 0)
-		//decrease_quick_sort(vector, 0, number_times - 1);
-	printf("%s\n", argv[1]);
-
-	if(argc == 1)
-	{	
-		increase_quick_sort(vector, 0, number_times - 1);
-		printf("cresceu\n");
-	}
-	else if(argc == 2 && !strcmp(argv[1], "-d"))
-	{
-		increase_quick_sort(vector, 0, number_times - 1);
-		printf("mais ou menos\n");
-	}
-	else if(argc == 2 && !strcmp(argv[1], "-r"))
-	{
+	  else if(option == 0)
+	
 		decrease_quick_sort(vector, 0, number_times - 1);
-		printf("decresceu\n");
-	}	
+	*/
 
+	if(argc == 1 || (argc == 2 && !strcmp(argv[1], "-d")))
+		increase_quick_sort(vector, 0, number_times - 1);
+	
+	else if(argc == 2 && !strcmp(argv[1], "-r"))
+		decrease_quick_sort(vector, 0, number_times - 1);
+		
 
 	for(counter = 0; counter < number_times; ++counter)
 		printf("%d\n", vector[counter]);
