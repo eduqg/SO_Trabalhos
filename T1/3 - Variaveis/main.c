@@ -50,7 +50,7 @@ int main(){
 	s2. Compare a string armazenada em s1 com a string armazenada em s2 e imprima
 	o resultado na tela.
 	*/
-	printf("Digite uma string: ");
+	printf("Digite uma string de no máximo 100 caracteres: ");
 	scanf("%s", s1);
 	strcpy(s2,s1);
 	printf("s1: %s\n", s1);
