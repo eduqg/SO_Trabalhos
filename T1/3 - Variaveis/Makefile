@@ -1,3 +1,7 @@
 all:
 
-	gcc variaveis.c -W -Wall -pedantic -ansi -lm
+	gcc main.c -W -Wall -pedantic -ansi -lm -o prog
+
+clean:
+
+	rm prog
