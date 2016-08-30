@@ -1,7 +1,14 @@
+CC := gcc
+CFLAGS := -W -Wall -pedantic -ansi -lm
+
 all:
 
-	gcc main.c -W -Wall -pedantic -ansi -lm -o prog
+	$(CC) main.c -o prog $(CFLAGS)
 
 clean:
 
 	rm prog
+
+run:
+
+	./prog
