@@ -1,3 +1,7 @@
 all:
 
-	gcc lista.c -W -Wall -pedantic -ansi -lm
+	gcc main.c sort.c array.c  -o a
+
+clean:
+
+	rm -rf a

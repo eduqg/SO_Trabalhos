@@ -1,3 +1,13 @@
+/*
+ ============================================================================
+ Name        : sort.c
+ Author      : Eduardo Gomes and Miguel Pimentel
+ Version     :
+ Copyright   :
+ Description : Ordenate a dynamic vector of integer
+ ============================================================================
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,24 +15,29 @@
 #include "array.h"
 #include "sort.h"
 
-int main(argc, char argv* [])
+int main(int argc, char* argv[])
 {
-	initialize();
+	int *vector;
+	int number_times;
 
-	if(argc == 1 || argc > 1 && argv [2] == "-d")
-		increase_quick_sort(*vector, 0, vector_length - 1)
+	scanf("%d", &number_times);
+
+	vector = initialize(vector, number_times);
+
+	scan_vector(vector, number_times);	
+
+	if(argc == 1 || (argc == 2 && !strcmp(argv[1], "-d")))
+		increase_quick_sort(vector, 0, number_times - 1);
 	
-	else if((argc > 1 && argc < 3) && argv[2] == "-r")
-		decrease_quick_sort(*vector, 0, vector_length - 1)
+	else if(argc == 2 && !strcmp(argv[1], "-r"))
+		decrease_quick_sort(vector, 0, number_times - 1);
 
-	else
-		printf("Lembre-se somente é válido as flags: '-d' e '-r'. Sendo que elas 
-				podem ser executas somente de forma individual\n");
 
-	print_vector(&vector);
 
-	destroy(&vector);
+	print_vector(vector, number_times);
 
-	return 0;	
+	destroy(vector);
+
+	return 0;
 }
-
+	

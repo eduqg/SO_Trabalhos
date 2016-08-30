@@ -1,24 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void initialize(void)
+
+int* initialize(int *vector, int number)
 {
-	int *vector;
-	int vector_length = 0;
-	scanf("%d", &vector_length);
-	vector = (int*) calloc(vector_length, sizeof(int));
+	vector = (int*) calloc(number, sizeof(int));
+
+	if(vector == NULL)
+	{
+		printf("Memória Insuficiente\n");
+		exit(1);
+	}	
+
+	return vector;
 }
 
-void destroy(int* vector)
+void scan_vector(int *vector, int number)
 {
-	free(vector);
+	int i = 0;
+
+	for(i = 0; i < number; ++i)
+		scanf("%d", &vector[i]);
 }
 
-void print_vector(int* vector)
+void print_vector(int *vector, int number)
 {
-	int counter = 0;
-	for(counter  = 0; counter < vector_length; ++counter)
-		printf("%d  ", &vector[counter]);
+	int i = 0;
 
 	printf("\n");
+	for(i = 0; i < number; ++i)
+		printf("%d\n", vector[i]);
+}
+
+void destroy(int *vector)
+{
+	free(vector);
 }

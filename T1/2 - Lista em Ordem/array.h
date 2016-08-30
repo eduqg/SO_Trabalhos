@@ -1,7 +1,7 @@
+int* initialize(int *vector, int number);
 
-void initialize(void);
+void scan_vector(int *vector, int number);
 
-void print_vector(int* vector);
+void print_vector(int *vector, int number);
 
-void destroy(int* vector);
-
+void destroy(int *vector);
