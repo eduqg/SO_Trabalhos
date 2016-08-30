@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
+#include <string.h>
 
 void increase_quick_sort(int *vector, int left_element , int right_element)
 {
@@ -86,15 +87,32 @@ int main(int argc, char* argv[])
 	for(counter = 0; counter < number_times; ++counter)
 		scanf("%d", &vector[counter]);
 
-	printf("Para ordenação crescente aperte 1, para operação decrescente aperte 0: ");
+	//printf("Para ordenação crescente aperte 1, para operação decrescente aperte 0: ");
 
-	scanf("%d", &option);
+	//scanf("%d", &option);
 
-	if(option == 1)
+	//if(option == 1)
+		//increase_quick_sort(vector, 0, number_times - 1);
+
+	//else if(option == 0)
+		//decrease_quick_sort(vector, 0, number_times - 1);
+	printf("%s\n", argv[1]);
+
+	if(argc == 1)
+	{	
 		increase_quick_sort(vector, 0, number_times - 1);
-
-	else if(option == 0)
+		printf("cresceu\n");
+	}
+	else if(argc == 2 && !strcmp(argv[1], "-d"))
+	{
+		increase_quick_sort(vector, 0, number_times - 1);
+		printf("mais ou menos\n");
+	}
+	else if(argc == 2 && !strcmp(argv[1], "-r"))
+	{
 		decrease_quick_sort(vector, 0, number_times - 1);
+		printf("decresceu\n");
+	}	
 
 
 	for(counter = 0; counter < number_times; ++counter)
@@ -104,4 +122,4 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
-
+	

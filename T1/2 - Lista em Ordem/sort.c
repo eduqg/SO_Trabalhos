@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 void increase_quick_sort(int *vector, int left_element , int right_element)
 {
 	
