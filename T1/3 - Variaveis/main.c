@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "variaveis.h"
+#include "main.h"
 #include <string.h>
 
 
@@ -18,7 +18,6 @@ int main(){
 	Carregue o endereço da variável number1 no ponteiro dPtr .
 	*/
 	dPtr = &number1;
-	printf("Endereco de dPtr: %p\n", (void*)dPtr);
 	/*
 	Imprima em tela o valor da variável apontada por dPtr partindo do ponteiro.
 	*/
