@@ -17,8 +17,8 @@
 
 int main(int argc, char* argv[])
 {
-	int *vector;
-	int number_times;
+	int *vector = NULL;
+	int number_times = 0;
 
 	if(argc == 1 || (argc == 2 && !strcmp(argv[1], "-d")))
 	{
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		printf("Somente é aceito as flags '-d' e '-r . Tente novamente !\n");
+		printf("Somente é aceito os parâmetros '-d' e '-r . Tente novamente!\n");
 	}
 	
 

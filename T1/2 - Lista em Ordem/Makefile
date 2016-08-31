@@ -1,7 +1,12 @@
+CC := gcc
+CFLAGS := -W -Wall -pedantic -ansi -lm
+
 all:
 
-	gcc main.c sort.c array.c  -o a
+	$(CC) main.c sort.c array.c  -o a $(CFLAGS)
 
 clean:
 
 	rm -rf a
+
+
