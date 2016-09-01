@@ -8,5 +8,6 @@ void print_menu()
     printf("-\t2 - Calcula condicao de existencia\t-\n");
     printf("-\t3 - Calcula perímetro triangulo\t\t-\n");
     printf("-\t4 - Calcula area do triangulo\t\t-\n");
+    printf("-\t5 - Sair\t\t\t\t-\n");
     printf("-------------------------------------------------\n");
 }

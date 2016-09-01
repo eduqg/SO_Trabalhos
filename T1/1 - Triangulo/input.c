@@ -96,6 +96,10 @@ void start_program(){
                 printf("A área do triangulo é %.2f\n", result_area);
                 break;
 
+            case 5:
+                exit(0);
+                break;
+
             default:
                 printf("Opção inválida, digite um número de 0 a 4!");
                 break;
