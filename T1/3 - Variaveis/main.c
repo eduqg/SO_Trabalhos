@@ -1,3 +1,13 @@
+/*
+ ============================================================================
+ Name        : main.c
+ Author      : Eduardo Gomes and Miguel Pimentel
+ Version     :
+ Copyright   :
+ Description : Main function of answer of 3
+ ============================================================================
+*/
+
 #include <stdio.h>
 #include "main.h"
 #include <string.h>
