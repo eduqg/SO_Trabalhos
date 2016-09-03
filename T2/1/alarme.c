@@ -11,31 +11,33 @@ int main(void)
 		fork()  creates  a new process by duplicating the calling process. 
 		The new process is referred to as the child process.
 	*/
-	int PID = fork();
+	int PID;
+	while(1){
+		PID = fork();
 
 
-	if(PID == 0)
-	{
-		//child process
-		printf("Child process\n");
-		sleep(5);
-		/*
+		if(PID == 0)
+		{
+			//child process
+			printf("Child process\n");
+			sleep(5);
+			/*
 
-		*/
-		kill(PID, SIGALRM);
-	} 
-	else if(PID == -1)
-	{
-		//error has ocurred
+			*/
+			kill(PID, SIGALRM);
+		} 
+		else if(PID == -1)
+		{
+			//error has ocurred
 
-		printf("Process failed\n");
+			printf("Process failed\n");
+		}
+		else
+		{
+
+			//parent process
+			pause();
+		}
 	}
-	else
-	{
-
-		//parent process
-		pause();
-	}
-
 	return 0;
 }
