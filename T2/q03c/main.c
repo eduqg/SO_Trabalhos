@@ -42,14 +42,16 @@ int main()
                                                       {5,1}};
     int matrix2[max2i][max2j] ={{4,1,3},
                                                      {2,-5,7}};
-    int result[3][3];
+
     int i = 0;
     int j = 0;
 
+    int result[3][3];
+
     int a=0, b=0; /*to iterate four member per time on the matrix*/
 
-    pthread_t thread[9];
-    int n = 0; /*number of thread*/
+    pthread_t thread[2];
+    int z = 0;
 
     thread_arg arguments;
 
@@ -59,34 +61,40 @@ int main()
 
     startTime = (float)clock()/CLOCKS_PER_SEC;
 
-    for(i = 0; i < 3; i++){
-        for(j = 0; j < 3 ; j++){
+    for(i = 0; i < max1i; i++){
+        for(j = 0; j < max2j ; j++){
                 /*set all values of the matrix*/
                 arguments.a00 = matrix1[a][0]; /*00 00  |10 10 10 | 20 20 20*/
                 arguments.b00 = matrix2[0][b]; /*01 02  |00 01 02 | 00 01 02*/
                 arguments.a01 = matrix1[a][1]; /*01 01  |11 11 11 | 21 21 21*/
                 arguments.b10 = matrix2[1][b]; /*11 12  |10 11 12 | 10 11 12*/
-
-                if(pthread_create(&(thread[n]), NULL,  function_threads, &arguments)){
+                if(pthread_create(&(thread[z]), NULL,  function_threads, &arguments)){
                     printf("Error to create Thread\n");
                     return 1;
                 }
-                if(pthread_join(thread[n], NULL)) {
+                if(pthread_join(thread[z], NULL)) {
                     printf("Error to joint Thread\n");
                     return 2;
                 }
                 result[i][j] = arguments.result;
 
-                b++; n++;
+                b++;
+
+                if(z == 0){
+                    z=1;
+                }else{
+                    z=0;
+                }
         }
         a++; b = 0;
     }
 
-    for(i = 0; i < 3; i++){
-        for(j = 0; j < 3 ; j++){
-            printf("[%d] ", result[i][j]);
-        }
+    printf("Matriz do Resultado:\n");
+    for(i = 0; i < max1i; i++){
         printf("\n");
+        for( j = 0; j < max2j; j++){
+            printf("[%d][%d]: %d ", i, j, result[i][j]);
+        }
     }
 
     endTime = (float)clock()/CLOCKS_PER_SEC;

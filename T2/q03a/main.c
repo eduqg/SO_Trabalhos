@@ -7,27 +7,34 @@
 /*============================================================================*/
 
 #include <stdio.h>
+#include <time.h>
 #define max1i 3
-#define max1j 3
+#define max1j 2
 
-#define max2i 3
-#define max2j 2
+#define max2i 2
+#define max2j 3
 
 int main()
 {
     /*Declarations*/
-    int matrix1[max1i][max1j] = { {1,2,0},
-                                                       {4,3,1},
-                                                        {5,5,5}};
-    int matrix2[max2i][max2j] ={ {2,2},
-                                                       {4,4},
-                                                       {1,4}};
+    int matrix1[max1i][max1j] = {{-2,3},
+                                                      {-4,-2},
+                                                      {5,1}};
+    int matrix2[max2i][max2j] ={{4,1,3},
+                                                     {2,-5,7}};
+
     int result[100][100];
 
     int i = 0;
     int j = 0;
     int k = 0;
     int sum = 0;
+
+    double startTime = 0;
+    double endTime = 0;
+    double timeElapsed = 0;
+
+    startTime = (float)clock()/CLOCKS_PER_SEC;
 
     /* Verify condition to multiply*/
     if(max1j == max2i){
@@ -64,7 +71,10 @@ int main()
             printf("[%d][%d]: %d ", i, j, result[i][j]);
         }
     }
-    printf("\n");
 
+    endTime = (float)clock()/CLOCKS_PER_SEC;
+    timeElapsed = endTime - startTime;
+
+    printf("\n\nTempo de Execucao: %.6f\n", timeElapsed);
     return 0;
 }
