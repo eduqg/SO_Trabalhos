@@ -3,7 +3,7 @@ CFLAGS := -W -Wall -pedantic -ansi -lm -lpthread
 
 all:
 
-	$(CC) main.c -o prog $(CFLAGS)
+	$(CC) alarme.c -o prog $(CFLAGS)
 
 clean:
 

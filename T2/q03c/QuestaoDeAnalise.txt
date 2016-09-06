@@ -1,0 +1,85 @@
+Questão de análise
+
+    - Compare o desempenho em termos de tempo de execução das três aplicações e
+justifique eventuais diferenças de desempenho obtidas. Em sua resposta, indique
+qual foi a implementação mais rápida em termos de tempo de execução.
+    - Para essa solução, será necessário usar esquemas de bechmarking para
+comparar os tempos de execução das aplicações
+
+Compile o arquivo com make
+Execute o Arquivo com make run
+
+Para a anáise dos tempos de execução serão utilizados:
+- Biblioteca <time.h> que será implementada no código
+- time ./prog
+- times ./prog
+
+Os resultados obtidos foram:
+
+- Resultados com <time.h> no código
+
+q03a
+
+Tempo de Execucao: 0.000118
+Tempo de Execucao: 0.000138
+Tempo de Execucao: 0.000145
+
+q03b
+
+Tempo de Execucao: 0.000408
+Tempo de Execucao: 0.000283
+Tempo de Execucao: 0.000434
+
+q03c
+
+Tempo de Execucao: 0.000443
+Tempo de Execucao: 0.000430
+Tempo de Execucao: 0.000517
+
+- Resultados com time ./prog
+
+q03a
+
+real    0m0.001s
+user    0m0.000s
+sys 0m0.000s
+
+q03b
+
+real    0m0.002s
+user    0m0.000s
+sys 0m0.000s
+
+q03c
+
+real    0m0.002s
+user    0m0.000s
+sys 0m0.004s
+
+- Resultados com times ./prog
+
+q03a
+
+0m0.084s 0m0.012s
+0m0.056s 0m0.032s
+
+q03b
+
+0m0.060s 0m0.004s
+0m0.048s 0m0.008s
+
+q03c
+
+0m0.060s 0m0.012s
+0m0.048s 0m0.008s
+
+
+Com os resultados obtidos pode-se observar algumas analises pertinentes a cada caso.
+O tempo de execução da q03a foi mais rápido que o tempo de execução das outras questões,
+a partir dessa afirmação, pode se afirmar a partir dos dados que na verdade há um queda de desempenho ao executar threads.
+O programa por ser simples obteve um melhor resultado em tempo de execução na q03a em relação as outras letras, porém, em
+relação a programas que tem um custo de processamento maior, o uso das threads poderiam compensar e ganhar em velocidade
+de programas que trabalham com uma só thread.
+Já na questão q03c, é perceptível o aumento de processamento do sistema ao executar com time ./prog, isso deve ao fato do próprio
+sistema ter que gerenciar as diversas requisições feitas.
+Concluindo, o desempenho da q03a foi superior a q03b e que por sua vez foi maior que a q03c.
