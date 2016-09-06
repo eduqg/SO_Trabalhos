@@ -17,11 +17,11 @@
 int main()
 {
     /*Declarations*/
-    int matrix1[max1i][max1j] = {{-2,3},
+    int matrix1[max1i][max1j] = {{-2, 3},
                                                       {-4,-2},
-                                                      {5,1}};
-    int matrix2[max2i][max2j] ={{4,1,3},
-                                                     {2,-5,7}};
+                                                      { 5, 1}};
+    int matrix2[max2i][max2j] ={{ 4, 1, 3},
+                                                     { 2,-5, 7}};
 
     int result[100][100];
 
@@ -37,26 +37,33 @@ int main()
     startTime = (float)clock()/CLOCKS_PER_SEC;
 
     /* Verify condition to multiply*/
-    if(max1j == max2i){
+    if(max1j == max2i)
+    {
         printf("É possível multiplicar essa matriz\n");
-    }else{
+    }else
+    {
         printf("É impossível multiplicar essa matriz\n");
         return(0);
     }
 
 
     /*Set all values of the result matrix to 0*/
-    for(i = 0; i < max1i ; i++){
-        for(j = 0; j < max1j; j++){
+    for(i = 0; i < max1i ; i++)
+    {
+        for(j = 0; j < max1j; j++)
+        {
             result[i][j] = 0;
         }
     }
 
     /*Do all calculus for the multiplication of the matrix*/
-    for(i = 0; i < max1i ; i++){
-        for(j = 0; j < max2j; j++){
+    for(i = 0; i < max1i ; i++)
+    {
+        for(j = 0; j < max2j; j++)
+        {
             sum= 0;
-            for(k = 0; k < max1j ; k++){
+            for(k = 0; k < max1j ; k++)
+            {
                 sum+= matrix1[i][k] * matrix2[k][j];
             }
             result[i][j] = sum;
@@ -65,9 +72,11 @@ int main()
 
     /*print the result*/
     printf("Matriz do Resultado:\n");
-    for(i = 0; i < max1i; i++){
+    for(i = 0; i < max1i; i++)
+    {
         printf("\n");
-        for( j = 0; j < max2j; j++){
+        for( j = 0; j < max2j; j++)
+        {
             printf("[%d][%d]: %d ", i, j, result[i][j]);
         }
     }

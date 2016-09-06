@@ -16,7 +16,8 @@
 #define max2i 2
 #define max2j 3
 
-typedef struct{
+typedef struct
+{
     int a00;
     int b00;
     int a01;
@@ -24,7 +25,8 @@ typedef struct{
     int result;
 }thread_arg, *ptr_thread_arg;
 
-void *function_threads(void *arg){
+void *function_threads(void *arg)
+{
 
     ptr_thread_arg arguments = (ptr_thread_arg)arg;
 
@@ -37,11 +39,11 @@ void *function_threads(void *arg){
 int main()
 {
     /*Declarations*/
-    int matrix1[max1i][max1j] = {{-2,3},
+    int matrix1[max1i][max1j] = {{-2, 3},
                                                       {-4,-2},
-                                                      {5,1}};
-    int matrix2[max2i][max2j] ={{4,1,3},
-                                                     {2,-5,7}};
+                                                      { 5, 1}};
+    int matrix2[max2i][max2j] ={{ 4, 1, 3},
+                                                     { 2,-5, 7}};
 
     int i = 0;
     int j = 0;
@@ -61,18 +63,29 @@ int main()
 
     startTime = (float)clock()/CLOCKS_PER_SEC;
 
-    for(i = 0; i < max1i; i++){
-        for(j = 0; j < max2j ; j++){
+    /*This entire for uses a and b to iterate all values to multiply the matrix1 and matrix2*/
+    /*For example: Two matrix 2x2: */
+    /*A = [a00][a01]  B = [b00][b01]*/
+    /*       [a10][a11]         [b10][b11]*/
+    /*To have the first cel of one matrix result, we have to calculate a00 * b00 + a01 * b10 */
+    /* Using this logic we can use for all cels of any matrix in this code */
+
+    for(i = 0; i < max1i; i++)
+    {
+        for(j = 0; j < max2j; j++)
+        {
                 /*set all values of the matrix*/
                 arguments.a00 = matrix1[a][0]; /*00 00  |10 10 10 | 20 20 20*/
                 arguments.b00 = matrix2[0][b]; /*01 02  |00 01 02 | 00 01 02*/
                 arguments.a01 = matrix1[a][1]; /*01 01  |11 11 11 | 21 21 21*/
                 arguments.b10 = matrix2[1][b]; /*11 12  |10 11 12 | 10 11 12*/
-                if(pthread_create(&(thread[z]), NULL,  function_threads, &arguments)){
+                if(pthread_create(&(thread[z]), NULL,  function_threads, &arguments))
+                {
                     printf("Error to create Thread\n");
                     return 1;
                 }
-                if(pthread_join(thread[z], NULL)) {
+                if(pthread_join(thread[z], NULL))
+                {
                     printf("Error to joint Thread\n");
                     return 2;
                 }
@@ -80,19 +93,23 @@ int main()
 
                 b++;
 
-                if(z == 0){
-                    z=1;
-                }else{
-                    z=0;
+                if(z == 0)
+                {
+                    z = 1;
+                }else
+                {
+                    z = 0;
                 }
         }
         a++; b = 0;
     }
 
     printf("Matriz do Resultado:\n");
-    for(i = 0; i < max1i; i++){
+    for(i = 0; i < max1i; i++)
+    {
         printf("\n");
-        for( j = 0; j < max2j; j++){
+        for( j = 0; j < max2j; j++)
+        {
             printf("[%d][%d]: %d ", i, j, result[i][j]);
         }
     }
