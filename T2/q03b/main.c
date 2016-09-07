@@ -61,6 +61,12 @@ int main()
 
     int i = 0, j = 0;
 
+    double startTime = 0;
+    double endTime = 0;
+    double timeElapsed = 0;
+
+    startTime = (float)clock()/CLOCKS_PER_SEC;
+
     thread = (pthread_t*)malloc(9 * sizeof(pthread_t));
     argument = (thread_arg*)malloc(9 * sizeof(thread_arg));
 
@@ -91,7 +97,7 @@ int main()
     for(n = 0; n < 9; n++)
         pthread_join(thread[n], NULL);
 
-
+    printf("\n");
     for(i = 0; i < 3 ; i++)
     {
         for(j = 0; j < 3  ; j++)
@@ -106,6 +112,10 @@ int main()
     free(thread);
     free(argument);
 
+    endTime = (float)clock()/CLOCKS_PER_SEC;
+    timeElapsed = endTime - startTime;
+
+    printf("\nTempo de Execucao: %.6f\n", timeElapsed);
 
     return 0;
 }
