@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <time.h>
+#include <stdlib.h>
 
 #define max1i 3
 #define max1j 2
@@ -34,12 +35,20 @@ void *function_threads(void *arg)
     arguments->result = arguments->a00 * arguments->b00 + arguments->a01 * arguments->b10;
 
     printf("Calculus done on Thread!\n");
+
     return NULL;
 }
 
 int main()
 {
-    /*Declarations*/
+
+    pthread_t *thread;
+
+    thread_arg *argument;
+
+    /*number of thread*/
+    int n = 0, num = 0;
+
     int matrix1[max1i][max1j] = {{-2, 3},
                                                       {-4,-2},
                                                       { 5, 1}};
@@ -47,25 +56,13 @@ int main()
                                                      { 2,-5, 7}};
     int result[3][3];
 
-    int i = 0;
-    int j = 0;
-
     /*to iterate four member per time on the matrix*/
-    int a=0, b=0;
+    int a = 0, b = 0;
 
-    pthread_t thread[9];
+    int i = 0, j = 0;
 
-    /*number of thread*/
-    int n = 0;
-
-    thread_arg arguments;
-
-    double startTime = 0;
-    double endTime = 0;
-    double timeElapsed = 0;
-
-    /*Star to count time*/
-    startTime = (float)clock()/CLOCKS_PER_SEC;
+    thread = (pthread_t*)malloc(9 * sizeof(pthread_t));
+    argument = (thread_arg*)malloc(9 * sizeof(thread_arg));
 
     /*This entire for uses a and b to iterate all values to multiply the matrix1 and matrix2*/
     /*For example: Two matrix 2x2: */
@@ -78,44 +75,37 @@ int main()
     {
         for(j = 0; j < max2j  ; j++)
         {
-                /*Set all values of the matrix*/
-                arguments.a00 = matrix1[a][0]; /*00 00  |10 10 10 | 20 20 20*/
-                arguments.b00 = matrix2[0][b]; /*01 02  |00 01 02 | 00 01 02*/
-                arguments.a01 = matrix1[a][1]; /*01 01  |11 11 11 | 21 21 21*/
-                arguments.b10 = matrix2[1][b]; /*11 12  |10 11 12 | 10 11 12*/
+            argument[n].a00 = matrix1[a][0];
+            argument[n].b00 = matrix2[0][b];
+            argument[n].a01 = matrix1[a][1];
+            argument[n].b10 = matrix2[1][b];
 
-                if(pthread_create(&(thread[n]), NULL,  function_threads, &arguments))
-                {
-                    printf("Error to create Thread\n");
-                    return 1;
-                }
-                if(pthread_join(thread[n], NULL))
-                {
-                    printf("Error to joint Thread\n");
-                    return 2;
-                }
-                result[i][j] = arguments.result;
-
-                b++; n++;
+            b++; n++;
         }
         a++; b = 0;
     }
 
-    /*Print the result*/
-    for(i = 0; i < max1i ; i++)
+    for(n = 0; n < 9; n++)
+        pthread_create(&thread[n], NULL,  function_threads, (void*)&argument[n]);
+
+    for(n = 0; n < 9; n++)
+        pthread_join(thread[n], NULL);
+
+
+    for(i = 0; i < 3 ; i++)
     {
-        for(j = 0; j < max2j  ; j++)
+        for(j = 0; j < 3  ; j++)
         {
+            result[i][j] = argument[num].result;
             printf("[%d] ", result[i][j]);
+            num++;
         }
         printf("\n");
     }
 
-    /*End time and print*/
-    endTime = (float)clock()/CLOCKS_PER_SEC;
-    timeElapsed = endTime - startTime;
+    free(thread);
+    free(argument);
 
-    printf("\n\nTempo de Execucao: %.6f\n", timeElapsed);
 
     return 0;
 }
