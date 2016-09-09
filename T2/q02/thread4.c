@@ -22,66 +22,68 @@ void* set_one(void* args)
 	pthread_exit(0);
 }
 
-
+/*
 void* compare_values(void* args)
 {
 	ARGS *aux = (ARGS *) args;
 
-	int i =  aux -> i;
-	int j =  aux -> j;
-	int prev_value = aux ->  i_value;
-	int next_value = aux -> j_value;
-
-	if(i < j)
+	if((aux -> w[aux -> i]) < (aux -> w[ aux -> j]))
 	{
-		aux -> w[i] = 0;
+		aux -> i = aux -> i;
+		aux -> j = aux -> j;
+		aux -> i_value = aux -> w[aux -> i];
+		aux -> j_value = aux -> w[aux -> j];		
+		aux -> w[aux -> i] = 0; 		
 	}
 	else
 	{
-		aux -> w[j] = 0;
+		aux -> i = aux -> i;
+		aux -> j = aux -> j;
+		aux -> i_value = aux -> w [aux -> i];
+		aux -> j_value = aux -> w [aux -> j];		
+		aux -> w[aux -> j] = 0; 	
 	}
 
-	pthread_exit(0);
-
-}
 	
+	pthread_exit(0);
+}
+*/
+/*
 
-int* calculate_bigger(int size, ARGS *arg)
+int* calculate_bigger(int length, ARGS *arg)
 {
 	int m = 0;
-	int *w = arg -> w;
-	int counter  = 0;
+
+ 
 	pthread_t *threads;
 
-	m = size * (size -1 )/2;
-
+	m = length * (length -1)/2;
 	threads = (pthread_t *) calloc(m, sizeof(pthread_t));
 
-	for(int i = 0; i < size; ++i)
-		for(int j = i + 1; i < size; ++j)
-		{
-			arg[counter].i = i;
-			arg[counter].j = j;
-			arg[counter].i_value = w[i];
-			arg[counter].j_value = w[j];
-			pthread_create(&threads[i], NULL, &compare_values, (void *) &arg[counter]);
-			++counter;
-		}	
+	for(int i = 0; i < m; ++i)
+		for(int j = i + 1; i < m; ++j)
+			pthread_create(&threads[i], NULL, &compare_values, &arg);
+
 
 	for(int i = 0; i < m; ++i)
 		for(int j = i + 1; i < m; ++j)
 			pthread_join(threads[i], NULL);
 
 
+
+
 	free(threads);
 
-	return w;
+	return arg -> w;
 }
 
-int* set_vector(int length, int *x) 
+*/
+int* set_vector(int length, int **x)
 {
-	int *w = x;	
+	int *w = (int *) calloc(length, sizeof(int));
 	pthread_t *threads;
+
+	w = &(**x);
 	
 	threads = (pthread_t *) calloc(length, sizeof(pthread_t));
 
@@ -132,7 +134,7 @@ int main(int argc, char **argv)
 		for(int i = 2; i < SIZE + 2; ++i)		
 			printf("%d ", arg -> x[i - 2]);
 
-		arg -> w = set_vector(SIZE, arg -> x);
+		arg -> w = set_vector(SIZE, &(arg -> x));
 
 
 		printf("\nVetor Setado com 1\n");
@@ -140,18 +142,13 @@ int main(int argc, char **argv)
 		for(int i = 2; i < SIZE + 2; ++i)		
 			printf("%d ", arg -> w[i - 2]);
 
-		arg -> w = calculate_bigger(SIZE, arg);
-
-		int m = SIZE * (SIZE -1)/2;
-
-		printf("\nVetor depois da segunda THREAD\n");
-
-		for(int i = 2; i < SIZE + 2; ++i )
-			printf("%d ", arg -> w[i - 2]);		
+//		arg -> w = calculate_bigger(SIZE, arg);
 
 		printf("\n");
 
+
 	}
+
 
 	exit(0);
 }
