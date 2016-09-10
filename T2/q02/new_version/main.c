@@ -28,6 +28,10 @@ int main(int argc, char **argv)
 
 		print_vector(SIZE, args -> w);
 
+		args -> w = calculate_bigger(SIZE, args);
+
+
+
 
 	}	
 	else
