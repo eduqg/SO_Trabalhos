@@ -21,7 +21,7 @@ int main(void)
 	else if(PID < 0)
 	{
 		
-		printf("Process failed\n");
+		printf("ERROR: Child Process has not been created\n");
 	}
 	else
 	{
