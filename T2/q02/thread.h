@@ -1,3 +1,12 @@
+/*============================================================================*/
+/*Name        : thread.h.c*/
+/*Author      : Eduardo Gomes and Miguel Pimentel*/
+/*Version     :*/
+/*Copyright   :*/
+/*Description : Contains the headers to thread.c*/
+/*============================================================================*/
+
+
 typedef struct args
 {
     int i_now;

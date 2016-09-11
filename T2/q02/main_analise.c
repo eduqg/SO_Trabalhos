@@ -1,3 +1,11 @@
+/*============================================================================*/
+/*Name        : main_analise.c*/
+/*Author      : Eduardo Gomes and Miguel Pimentel*/
+/*Version     :*/
+/*Copyright   :*/
+/*Description : Contains the main to q02 analysis*/
+/*============================================================================*/
+
 #include <stdlib.h>
 #include <stdio.h>
 

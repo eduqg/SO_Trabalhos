@@ -1,3 +1,11 @@
+/*============================================================================*/
+/*Name        : threads.c*/
+/*Author      : Eduardo Gomes and Miguel Pimentel*/
+/*Version     :*/
+/*Copyright   :*/
+/*Description : Contains functions to main.c*/
+/*============================================================================*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>

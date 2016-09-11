@@ -1,3 +1,11 @@
+/*============================================================================*/
+/*Name        : main.c*/
+/*Author      : Eduardo Gomes and Miguel Pimentel*/
+/*Version     :*/
+/*Copyright   :*/
+/*Description : Contains the main*/
+/*============================================================================*/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "thread.h"
