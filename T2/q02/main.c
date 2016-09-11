@@ -18,23 +18,23 @@ int main(int argc, char **argv)
 			exit(0);
 		}
 
+		printf("Number of input values = %d\n",SIZE);
 
 		args = (ARGS *) malloc(sizeof(ARGS));
-
 		args -> x = initialize_vector_x(SIZE, &(*argv));
-		printf("Vetor X: ");
+		printf("Input values x = ");
 		print_vector(SIZE, args -> x);
+		printf("\n");
 
 		args -> w = initialize_vector_w(SIZE);
-		printf("Vetor W: ");
+		printf("After initialization w = ");
 		print_vector(SIZE, args -> w);
+		printf("\n");
 
 		args -> w = calculate_bigger(SIZE, args);
-
-		printf("Vetor X: ");
-		print_vector(SIZE, args->x);
-
-		printf("Vetor W: ");
+		printf("\n");
+		printf("After Step 2\n");
+		printf("w = ");
 		print_vector(SIZE, args->w);
 
 		print_max_number(SIZE, args);

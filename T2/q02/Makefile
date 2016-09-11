@@ -3,12 +3,12 @@ CFLAGS := -W -Wall -pedantic -ansi -lpthread -std=c99
 
 all:
 	$(CC) main.c thread.c -o prog $(CFLAGS)
-
+	$(CC) main_analise.c -o prog_analise $(CFLAGS)
 run:
 
-	./prog 5 3 6 2 1 2
+	./prog 5 4 3 2 1 5
 
 clean:
 
-	rm -rf prog
+	rm -rf prog prog_analise
 

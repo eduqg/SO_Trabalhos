@@ -88,6 +88,7 @@ int* calculate_bigger(int size, ARGS *args)
 		if(result_is == -1)
 			continue;
 
+		//printf("Writes 0 into w[%d]\n", result_is);
 		args1 -> w[result_is] = 0;
 		//print_vector(size, args1->w);
 
@@ -110,20 +111,21 @@ void* compare_values(void* arguments)
 	int second = args1->x[j_now];
 
 	//printf("-------i_now->: %d j_now-> %d\n", i_now,j_now);
+	printf("Thread T(%d,%d) compares x[%d] = %d and x[%d] = %d\n",i_now,j_now,i_now,first,j_now,second);
 	if(first < second){
 		//printf("Second %d é maior que %d\n",second, first );
-		printf("Thread to Compare Values Done!\n");
+		//printf("Thread to Compare Values Done!\n");
 		pthread_exit(&args1->i_now);
 	}
 	if(first > second){
 		//printf("First %d é maior que %d\n",first,second);
-		printf("Thread to Compare Values Done!\n");
+		//printf("Thread to Compare Values Done!\n");
 		pthread_exit(&args1->j_now);
 	}
 	else
 	{
 		args1->i_now = -1;
-		printf("Thread to Compare Values Done!\n");
+		//printf("Thread to Compare Values Done!\n");
 		pthread_exit(&args1->i_now);
 	}
 
@@ -145,7 +147,7 @@ void destroy(int *vector)
 
 void* set_one(void *args)
 {
-	printf("Thread set to 1 Done!\n");
+	//printf("Thread set to 1 Done!\n");
 	int *w = args;
 	*w = 1;
 
@@ -181,9 +183,10 @@ void *show_max_number(void *args){
 	//printf("Valor now: %d\n", now);
 
 	if(args1 -> w[now] == 1){
-		printf("Valor maximo esta na posicao %d e tem o valor de %d\n",now, args1 -> x[now]);
+		printf("Maximum = %d\n",args1 -> x[now]);
+		printf("Location = %d\n",now);
 	}
 
-	printf("Thread show max number Done!\n");
+	//printf("Thread show max number Done!\n");
 	return NULL;
 }
