@@ -1,5 +1,5 @@
 /*============================================================================*/
-/*Name        : main.c*/
+/*Name        : alarme.c*/
 /*Author      : Eduardo Gomes and Miguel Pimentel*/
 /*Version     :*/
 /*Copyright   :*/
