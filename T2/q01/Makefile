@@ -3,12 +3,12 @@ CFLAGS := -W -Wall -pedantic -lm
 
 all:
 
-	$(CC) alarme.c -o prog $(CFLAGS)
-
-clean:
-
-	rm prog
+	$(CC) alarme.c -o q01 $(CFLAGS)
 
 run:
 
-	./prog
+	./q01
+
+clean:
+
+	rm -rf q01
