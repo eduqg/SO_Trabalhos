@@ -1,16 +1,15 @@
-typedef struct args ARGS;
-
-struct args
+typedef struct args
 {
-	int i;
-	int j;
-	int i_value;
-	int j_value;
-	int *w;
-	int *x;
-};
+    int i_now;
+    int j_now;
+    int *w;
+    int *x;
 
-int* initialize_vector(int size, char **input);
+}ARGS, *ptr_thread_arg;
+
+int* initialize_vector_x(int size, char **input);
+
+int* initialize_vector_w(int size);
 
 void print_vector(int size, int *vector);
 

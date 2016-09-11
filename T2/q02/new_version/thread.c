@@ -4,7 +4,7 @@
 #include "thread.h"
 
 
-int* initialize_vector(int size, char **input)
+int* initialize_vector_x(int size, char **input)
 {
 	int *x = (int *) calloc(size, sizeof(int));
 
@@ -14,25 +14,18 @@ int* initialize_vector(int size, char **input)
 	return x;
 }
 
-void print_vector(int size, int *vector)
+int* initialize_vector_w(int size)
 {
-	for(int  i = 0; i < size; ++ i)
-		printf("%d ", vector[i]);
+	int *w = (int*) calloc(size, sizeof(int));
+	pthread_t thread[size];
+	int n = 0;
+	for(n = 0; n < size; n++)
+		pthread_create(&thread[n], NULL,  set_one, (void*)&w[n]);
 
-	printf("\n");
-}
+	for(n = 0; n < size; n++)
+		pthread_join(thread[n], NULL);
 
-void destroy(int *vector)
-{
-	free(vector);
-}
-
-void* set_one(void *args)
-{
-	int *w = args;
-	*w = 1;
-
-	pthread_exit(0);
+	return w;
 }
 
 int* set_vector(int size, int *x)
@@ -55,52 +48,99 @@ int* set_vector(int size, int *x)
 
 int* calculate_bigger(int size, ARGS *args)
 {
-	int *w = args -> w;
-	pthread_t *threads;
+	printf("No bigger\n");
 
-	int  m = size* (size - 1) / 2;
+	int i = 0, j = 0;
 
-	threads = (pthread_t *) calloc(m, sizeof(pthread_t));
+	int  m = size* (size - 1) / 2.0;
 
-	for(int i = 0; i < size; ++i)
-	{
-		for(int j = i + 1; i < size; ++i)
-		{
-			int counter = 0;
-			args[counter].i = i;
-			args[counter].j = j;
-			args[counter].i_value = w[i];
-			args[counter].j_value = w[j];
-			pthread_create(&threads[i], NULL, &compare_values, &w[i]);
-			++counter;
+	ARGS *args1 = (ARGS *) malloc(m*sizeof(ARGS));
+	//args1 -> now = (int*)malloc(m)
+	pthread_t *thread;
+
+	thread = (pthread_t*)malloc(m * sizeof(pthread_t));
+
+	int n = 0;
+
+   	for(i = 0; i < size; ++i){
+		for(j = i + 1; j < size; ++j, n++){
+			args1[n].x = args -> x;
+			args1[n].i_now = i;
+			args1[n].w = args ->w;
+			args1[n].j_now = j;
+
 		}
+    	}
+    	//printf("---X\n"); print_vector(size,args1->x);
+	for(n=0; n < m; n++){
+		pthread_create(&thread[n], NULL, compare_values, (void*)&args1[n]);
+    	}
+
+
+
+    	for(i = 0; i < n; ++i)
+	{
+
+
+		void *result;
+		pthread_join(thread[i], &result);
+
+		int result_is = *((int*)result);
+		printf("Rissultato: %d\n", result_is);
+
+		args1 -> w[result_is] = 0;
+
+    	}
+    	printf("Size: %d\n", size);
+
+
+    	free(thread);
+	return args->w;
+
+}
+void* compare_values(void* arguments)
+{
+	ARGS *args1 = (ARGS*)arguments;
+
+	int i_now = args1->i_now;
+	int j_now = args1 -> j_now;
+
+	int first = args1->x[i_now];
+	int second = args1->x[j_now];
+
+	printf("-------i_now->: %d j_now-> %d\n", i_now,j_now);
+	if(first < second){
+		printf("Second %d é maior que %d\n",second, first );
+		pthread_exit(&args1->i_now);
+	}
+	if(first > second){
+		printf("First %d é maior que %d\n",first,second);
+		pthread_exit(&args1->j_now);
 	}
 
+	//printf("Thread to Compare Values Done!\n");
 
-	for(int  i = 0; i <m; ++i)
-		for(int  j = i + 1; i < m; ++j)
-			pthread_join(threads[i], NULL);
-
-	free(threads);
-
-	return w;
-
+	return NULL;
 }
-
-void* compare_values(void* args)
+void print_vector(int size, int *vector)
 {
-	ARGS *aux = (ARGS *) args;
+	for(int  i = 0; i < size; ++ i)
+		printf("%d ", vector[i]);
 
-	int i =  aux -> i;
-	int j =  aux -> j;
-	
-
-	if(i < j)
-		aux -> w[i] = 0;
-
-	else
-		aux -> w[j] = 0;
-
-	pthread_exit(0);
-
+	printf("\n");
 }
+
+void destroy(int *vector)
+{
+	free(vector);
+}
+
+void* set_one(void *args)
+{
+	printf("Thread set to 1 Done!\n");
+	int *w = args;
+	*w = 1;
+
+	return NULL;
+}
+
