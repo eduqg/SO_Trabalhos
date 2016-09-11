@@ -6,7 +6,7 @@ all:
 
 run:
 
-	./prog 4 4 3 2 1
+	./prog 5 3 6 2 1 2
 
 clean:
 

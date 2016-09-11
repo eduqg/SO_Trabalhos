@@ -81,14 +81,17 @@ int* calculate_bigger(int size, ARGS *args)
     	for(i = 0; i < n; ++i)
 	{
 
-
+		printf("\nThread %d Voltando\n",i);
 		void *result;
 		pthread_join(thread[i], &result);
 
 		int result_is = *((int*)result);
-		printf("Rissultato: %d\n", result_is);
+		printf("Result_is: %d\n", result_is);
+		if(result_is == -1)
+			continue;
 
 		args1 -> w[result_is] = 0;
+		print_vector(size, args1->w);
 
     	}
     	printf("Size: %d\n", size);
@@ -108,14 +111,19 @@ void* compare_values(void* arguments)
 	int first = args1->x[i_now];
 	int second = args1->x[j_now];
 
-	printf("-------i_now->: %d j_now-> %d\n", i_now,j_now);
+	//printf("-------i_now->: %d j_now-> %d\n", i_now,j_now);
 	if(first < second){
-		printf("Second %d é maior que %d\n",second, first );
+		//printf("Second %d é maior que %d\n",second, first );
 		pthread_exit(&args1->i_now);
 	}
 	if(first > second){
-		printf("First %d é maior que %d\n",first,second);
+		//printf("First %d é maior que %d\n",first,second);
 		pthread_exit(&args1->j_now);
+	}
+	else
+	{
+		args1->i_now = -1;
+		pthread_exit(&args1->i_now);
 	}
 
 	//printf("Thread to Compare Values Done!\n");
