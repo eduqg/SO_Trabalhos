@@ -32,10 +32,13 @@ int main(int argc, char **argv)
 		args -> w = calculate_bigger(SIZE, args);
 
 		printf("Vetor X: ");
-		print_vector(SIZE, args[0].x);
+		print_vector(SIZE, args->x);
 
 		printf("Vetor W: ");
-		print_vector(SIZE, args[0].w);
+		print_vector(SIZE, args->w);
+
+		print_max_number(SIZE, args);
+
 
 		free(args->w);
 		free(args->x);

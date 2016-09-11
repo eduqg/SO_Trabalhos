@@ -48,8 +48,6 @@ int* set_vector(int size, int *x)
 
 int* calculate_bigger(int size, ARGS *args)
 {
-	printf("No bigger\n");
-
 	int i = 0, j = 0;
 
 	int  m = size* (size - 1) / 2.0;
@@ -81,20 +79,20 @@ int* calculate_bigger(int size, ARGS *args)
     	for(i = 0; i < n; ++i)
 	{
 
-		printf("\nThread %d Voltando\n",i);
+		//printf("\nThread %d Voltando\n",i);
 		void *result;
 		pthread_join(thread[i], &result);
 
 		int result_is = *((int*)result);
-		printf("Result_is: %d\n", result_is);
+		//printf("Result_is: %d\n", result_is);
 		if(result_is == -1)
 			continue;
 
 		args1 -> w[result_is] = 0;
-		print_vector(size, args1->w);
+		//print_vector(size, args1->w);
 
     	}
-    	printf("Size: %d\n", size);
+    	//printf("Size: %d\n", size);
 
 
     	free(thread);
@@ -114,19 +112,21 @@ void* compare_values(void* arguments)
 	//printf("-------i_now->: %d j_now-> %d\n", i_now,j_now);
 	if(first < second){
 		//printf("Second %d é maior que %d\n",second, first );
+		printf("Thread to Compare Values Done!\n");
 		pthread_exit(&args1->i_now);
 	}
 	if(first > second){
 		//printf("First %d é maior que %d\n",first,second);
+		printf("Thread to Compare Values Done!\n");
 		pthread_exit(&args1->j_now);
 	}
 	else
 	{
 		args1->i_now = -1;
+		printf("Thread to Compare Values Done!\n");
 		pthread_exit(&args1->i_now);
 	}
 
-	//printf("Thread to Compare Values Done!\n");
 
 	return NULL;
 }
@@ -152,3 +152,38 @@ void* set_one(void *args)
 	return NULL;
 }
 
+void print_max_number(int size, ARGS *args){
+	pthread_t *thread;
+	thread = (pthread_t*)malloc(size * sizeof(pthread_t));
+	int i =0;
+
+	ARGS *args1 = (ARGS *) malloc(size*sizeof(ARGS));
+
+	for(i = 0; i < size; i++){
+		args1[i].now = i;
+		args1[i].x = args -> x;
+		args1[i].w = args -> w;
+	}
+	for(i = 0; i < size; i++){
+		pthread_create(&thread[i], NULL, show_max_number, (void*)&args1[i]);
+	}
+
+	for(i = 0; i < size; i++){
+		pthread_join(thread[i], NULL);
+
+	}
+}
+
+void *show_max_number(void *args){
+	ARGS *args1 = (ARGS*)args;
+
+	int now = args1->now;
+	//printf("Valor now: %d\n", now);
+
+	if(args1 -> w[now] == 1){
+		printf("Valor maximo esta na posicao %d e tem o valor de %d\n",now, args1 -> x[now]);
+	}
+
+	printf("Thread show max number Done!\n");
+	return NULL;
+}

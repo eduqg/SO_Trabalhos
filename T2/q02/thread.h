@@ -4,6 +4,7 @@ typedef struct args
     int j_now;
     int *w;
     int *x;
+    int now;
 
 }ARGS, *ptr_thread_arg;
 
@@ -22,6 +23,10 @@ void* set_one(void* args);
 int* calculate_bigger(int size, ARGS *args);
 
 void* compare_values(void* args);
+
+void print_max_number(int size, ARGS *args);
+
+void *show_max_number(void *args);
 
 
 
