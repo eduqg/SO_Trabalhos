@@ -15,6 +15,7 @@
 #include "primo.h"
 
 int32_t gera_primo(){
+	
     int32_t random;
 
     srand((unsigned) time(NULL));
@@ -30,6 +31,7 @@ int testa_primo(int32_t numero){
     int32_t i;
 
     /*Referencia http://br.ccm.net/faq/10300-verificar-se-um-inteiro-e-um-numero-primo-em-c*/
+
     if (numero % 2 == 0)
     {
         return 0;
