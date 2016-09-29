@@ -10,7 +10,7 @@ all:
 	nm -s build/libprimo.a
 	cp lib/primo.h build/primo.h
 	$(CC) -static src/main.c -L./build -I./build -lprimo -o build/main.run $(CFLAGS)
-	./build/main.run
+	./build/main.run -lm
 
 
 clean:

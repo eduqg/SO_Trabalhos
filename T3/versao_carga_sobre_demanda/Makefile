@@ -6,6 +6,7 @@ all:
 	$(CC) -c -fpic primo.c -o build/primo.o $(CFLAGS)
 	gcc -shared -o build/libprimo.so build/primo.o
 	gcc -L./build -Wl,-rpath=build -o main.run main.c -lprimo -ldl $(CFLAGS)
+	./main.run -lm
 
 clean:
 
@@ -13,4 +14,4 @@ clean:
 
 run:
 
-	./main.run
+	./main.run -lm
