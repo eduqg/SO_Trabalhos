@@ -8,7 +8,10 @@
 
 #include <stdio.h>
 #include <stdint.h>
-#include <primo.h>
+
+int testa_primo(int32_t primo);
+int32_t gera_primo();
+
 
 int main(void)
 {

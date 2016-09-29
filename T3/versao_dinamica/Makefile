@@ -1,20 +1,15 @@
 CC := gcc
-CFLAGS := -W -Wall -pedantic -ansi -lm -lpthread
+CFLAGS := -W -Wall -pedantic -ansi -lm -Werror
 
 all:
-	gcc -c -fpic primo.c -o build/primo.o
-	#$(CC)  -c primo.c -o primo.o
+	$(CC) -c -fpic primo.c -o build/primo.o $(CFLAGS)
 	gcc -shared -o build/libprimo.so build/primo.o
-	gcc  -o main.run main.c -lprimo
-	cp primo.h build/primo.h
-	gcc -L./build -o prog main.c -lprimo
-	./prog
-
+	gcc -L./build -Wl,-rpath=build -o main.run main.c -lprimo $(CFLAGS)
 
 clean:
 
-	rm prog build/*
+	rm main.run build/*
 
 run:
 
-	./prog
+	./main.run

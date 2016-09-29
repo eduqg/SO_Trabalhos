@@ -1,3 +1,12 @@
+/*============================================================================*/
+/*Name        : primo.h*/
+/*Author      : Eduardo Gomes and Miguel Pimentel*/
+/*Version     :*/
+/*Copyright   :*/
+/*Description : contains headers*/
+/*============================================================================*/
+
+
 #ifndef PRIMO_H
 #define PRIMO_H
 
