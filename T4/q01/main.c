@@ -6,28 +6,25 @@
 /*Description : Contains the main*/
 /*============================================================================*/
 
+#include <sys/stat.h>
+#include <time.h>
 #include <stdio.h>
 
-int main(void)
+int main(int argc, char **argv)
 {
 
-	char time[12] = {'2','0','1','6','0','2','1','2','0','9','0','0'};
-	int i = 0;
+	if(argc == 2)
+	{	
 
-	/*
-	do{
-		printf("Escreva a data no formato AAAAMMDDHHmm:\n");
-		scanf("%s", time);
-	}while((tam = strlen(time))!=12);
+	    struct stat t_stat;
+	    stat(argv[1], &t_stat);
+	    struct tm * timeinfo = localtime(&t_stat.st_ctime); // or gmtime() depending on what you want
+	    printf("File time and date: %s", asctime(timeinfo));
 
-	*/
-
-	for(i = 0; i < 12; i++){
-		printf("%c\n", time[i]);
 	}
 
+    return 0;
 
 
-		
-	return 0;
 }
+
