@@ -7,7 +7,7 @@ all:
 
 run:
 
-	./buscador /home/admin-lart/Documentos/FSO/SO_Trabalhos/T4 test 4
+	./buscador . test 4
 
 clean:
 
