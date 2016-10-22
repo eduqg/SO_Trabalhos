@@ -11,7 +11,7 @@ Por exemplo:
 
     ./buscador ./archievesOfTest test 7
     ./buscador ./archievesOfTest test 10
-    ./buscador . test 7
-    ./buscador . 12 7
+    ./buscador . test 3
+    ./buscador . 12 4
 
 
