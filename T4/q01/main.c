@@ -1,9 +1,9 @@
-/*============================================================================*/
+	/*============================================================================*/
 /*Name        : main.c*/
 /*Author      : Eduardo Gomes and Miguel Pimentel*/
 /*Version     :*/
 /*Copyright   :*/
-/*Description : Contains the main*/
+/*Description : Program to create a backcp file and datetime matadata */
 /*============================================================================*/
 
 
@@ -30,11 +30,18 @@ int main(int argc, char *argv[])
         if(argc != 3)
         {
                 printf("Usage: ./q01 <file_name> <YYYYMMDDHHmm>\n");
-                exit(1);
+                exit(-1);
         }
 
         char* file_name = argv[1];
         char* datetime = argv[2];
+
+        if(strlen(datetime) != 12)
+        {
+                printf("ERROR: %s there is not all information that is requested.\n", datetime);
+                printf("Usage: ./q01 <file_name> <YYYYMMDDHHmm>\n");
+                exit(-1);
+        }
  
         copy_file(argv);
         
@@ -105,7 +112,7 @@ int main(int argc, char *argv[])
 
 void copy_file(char** argv)
 {   
- 
+
         int input_file, output_file;    
         ssize_t ret_in, ret_out;        
         char buffer[BUF_SIZE];          
