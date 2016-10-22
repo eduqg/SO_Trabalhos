@@ -16,23 +16,27 @@
 
 #include <fcntl.h>
 
-int times_to_print;
+int passed;
 
 void print_content(char *file_path){
-    FILE *myfile;
-    myfile=fopen(file_path,"r");
-    int j;
-    char c;
+    passed --;
+    if(passed >= 0){
+            FILE *myfile;
+        myfile=fopen(file_path,"r");
+        int j;
+        char c;
 
-    printf("Arquivo encontrado: %s\n", file_path);
-    for(j = 0; j<30;j++){
-        c= fgetc(myfile);
-        if(c == EOF)
-            break;
-        printf("%c",c);
+        printf("Arquivo encontrado: %s\n", file_path);
+        for(j = 0; j<30;j++){
+            c= fgetc(myfile);
+            if(c == EOF)
+                break;
+            printf("%c",c);
+        }
+        printf("\n\n");
+        fclose(myfile);
     }
-    printf("\n\n");
-    fclose(myfile);
+
 }
 
 //Referencia: http://stackoverflow.com/questions/
@@ -56,7 +60,7 @@ void listdir(const char *name, int level, char *test_name, int times_to_print)
             if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
                 continue;
             //printf("%*s[%s]\n", level*2, "", entry->d_name);
-            listdir(path, level + 1, test_name, times_to_print);
+            listdir(path, level + 1, test_name,times_to_print);
         }
         else{
             //printf("%*s- %s\n", level*2, "", entry->d_name);
@@ -66,7 +70,7 @@ void listdir(const char *name, int level, char *test_name, int times_to_print)
                 strcat(file_path, entry->d_name);
                 print_content(file_path);
                 times_to_print--;
-                printf("-----Times to print: %d\n", times_to_print);
+                //printf("-----Times to print: %d\n", times_to_print);
             }
             if(times_to_print==0){
                  closedir(dir);
@@ -87,9 +91,9 @@ int main(int argc, char **argv)
                 printf("Origem: %s\n", argv[1]);
                 printf("Nome da substring: %s\n", argv[2]);
                 printf("Quantidade de arquivos a serem lidos: %s\n\n", argv[3]);
+                passed = atoi(argv[3]);
 
-                times_to_print = atoi(argv[3]);
-                listdir(argv[1], 0, argv[2], times_to_print);
+                listdir(argv[1], 0, argv[2], atoi(argv[3]));
 	}
 	else
 	{

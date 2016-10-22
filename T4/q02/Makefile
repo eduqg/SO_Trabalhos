@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -W -Wall -pedantic -lm
+CFLAGS := -pedantic -lm
 
 all:
 
@@ -7,7 +7,7 @@ all:
 
 run:
 
-	./buscador . test 4
+	./buscador ./archievesOfTest test 7
 
 clean:
 
