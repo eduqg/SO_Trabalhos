@@ -1,5 +1,5 @@
 CC :=  gcc
-CFLAGS:= -W -Wall -ansi -pedantic -lm -std=c99
+CFLAGS:= -W -Wall -ansi -pedantic -lm -std=c99 -lpthread
 
 
 all: 
