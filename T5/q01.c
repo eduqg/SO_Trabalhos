@@ -26,6 +26,8 @@ int main(int argc, char** argv)
 	else
 		//NOTHING TO DO
 
+
+	//IT HAS NOT DONE
 	//Handler to control when to operation should stop
 	//signal(SIGINT, handler);
 	
@@ -33,13 +35,17 @@ int main(int argc, char** argv)
 
 	int max_number_of_inputs[10];
 
+	//Set all possible inputs (a - j equal to 97 106 in ascii table) 
 	for(int i = 1; i < 10 ; ++i)
 		max_number_of_inputs[i] = i;
 
+
+	//Create threads trhough terminal inputs
 	for(int i = 0; i < number_of_threads; ++i)
 		pthread_create(&threads[i], NULL, function, &max_number_of_inputs[i]);
 
 
+	//Just a while 1. It should stop with ctrl + c signal (SIGINT, handle)
 	while(isOK);
 
 
